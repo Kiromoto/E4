@@ -1,48 +1,3 @@
-// Задание 1.
-// Написать, функцию, которая принимает в качестве аргумента объект и выводит в консоль все ключи и значения только
-// собственных свойств. Данная функция не должна возвращать значение.
-// const objOne = {
-//     name: 'object',
-//     count: 850,
-//     rating: 2,
-//     showtime: 120,
-//     title: 'All obout objects!',
-// };
-// const objTwo = Object.create(objOne);
-// objTwo.only = 'Property for only this object';
-//
-// function showObjectProperties(obj) {
-//     for (let key in obj) {
-//         if (obj.hasOwnProperty(key)) {
-//             console.log(`Ключ: ${key} - его значение ${obj[key]}`)
-//         }
-//     }
-// }
-//
-// showObjectProperties(objOne)
-
-// Задание 2.
-// Написать функцию, которая принимает в качестве аргументов строку и объект, а затем проверяет есть ли у переданного
-// объекта свойство с данным именем. Функция должна возвращать true или false.
-const objOne = {
-    name: 'object',
-    count: 850,
-    rating: 2,
-    showtime: 120,
-    title: 'All obout objects!',
-};
-
-function checkingPropertyExists(str, obj) {
-    console.log(str in obj)
-}
-
-checkingPropertyExists('title', objOne);
-
-// Задание 3.
-// Написать функцию, которая создает пустой объект, но без прототипа.
-const newEmptyObject = Object.create(null)
-
-
 // Задание 4.
 // Реализовать следующее консольное приложение подобно примеру, который разбирался в видео. Реализуйте его на прототипах.
 // Определить иерархию электроприборов. Включить некоторые в розетку. Посчитать потребляемую мощность.
@@ -62,4 +17,3 @@ const newEmptyObject = Object.create(null)
 //      информативные имена (а не a, b);
 //      четкая связь между классом и его экземплярами (класс описывает множество, а экземпляр конкретную реализацию);
 //      использование синтаксиса ES6 (кроме функции-конструкторов) и т. д.
-
