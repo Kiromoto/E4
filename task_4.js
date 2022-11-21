@@ -17,3 +17,20 @@
 //      информативные имена (а не a, b);
 //      четкая связь между классом и его экземплярами (класс описывает множество, а экземпляр конкретную реализацию);
 //      использование синтаксиса ES6 (кроме функции-конструкторов) и т. д.
+
+function ElectricAppliance(deviceName, devicePower) {
+    this.deviceName = deviceName;
+    this.devicePower = devicePower;
+    this.switched = false;
+}
+
+ElectricAppliance.prototype.switchOn = function () {
+    this.switched = true
+};
+ElectricAppliance.prototype.switchOff = function () {
+    this.switched = false
+};
+
+const laptop = new ElectricAppliance('Laptop', 42)
+
+console.log(laptop)
