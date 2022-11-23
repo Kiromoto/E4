@@ -18,11 +18,13 @@
 //      четкая связь между классом и его экземплярами (класс описывает множество, а экземпляр конкретную реализацию);
 //      использование синтаксиса ES6 (кроме функции-конструкторов) и т. д.
 
-function ElectricAppliance(deviceName, devicePower) {
+function ElectricAppliance(deviceName, devicePower, deviceType) {
     this.deviceName = deviceName;
     this.devicePower = devicePower;
     this.switched = false;
+    this.deviceType = deviceType;
 }
+
 
 ElectricAppliance.prototype.switchOn = function () {
     this.switched = true
@@ -30,7 +32,68 @@ ElectricAppliance.prototype.switchOn = function () {
 ElectricAppliance.prototype.switchOff = function () {
     this.switched = false
 };
+ElectricAppliance.prototype.setDeviceName = function (deviceName) {
+    this.deviceName = deviceName;
+};
+ElectricAppliance.prototype.setDevicePower = function (devicePower) {
+    this.devicePower = devicePower;
+};
+ElectricAppliance.prototype.setDeviceType = function (deviceType) {
+    this.deviceType = deviceType;
+};
 
-const laptop = new ElectricAppliance('Laptop', 42)
+function KitchenApp() {
+    this.funcDelayedStart = false;
+}
 
-console.log(laptop)
+// KitchenApp.prototype.startDelay = function (time) {
+//     console.log(`${time}`)
+// }
+
+
+function ComputersApp(comptype) {
+    this.compType = comptype;
+    this.sleepMode = false;
+
+}
+
+ComputersApp.prototype.sleepModeOn = function () {
+    this.sleepMode = true;
+    console.log(`SleepMode is activate!`)
+};
+ComputersApp.prototype.sleepModeOff = function () {
+    this.sleepMode = false;
+};
+
+
+function LightingApp(lightingType) {
+    this.lightingType = lightingType;
+    this.installed = false;
+    this.installLocation = undefined;
+
+}
+
+LightingApp.prototype.delayedStart = function (location) {
+    this.installed = true;
+    this.installLocation = location;
+}
+
+
+KitchenApp.prototype = new ElectricAppliance();
+ComputersApp.prototype = new ElectricAppliance();
+LightingApp.prototype = new ElectricAppliance();
+
+const comp1 = new ComputersApp('PC tower');
+comp1.setDeviceName('Computer 1');
+comp1.setDevicePower(350);
+console.log(comp1);
+
+
+const multicooker = new KitchenApp();
+multicooker.funcDelayedStart = true;
+multicooker.setDeviceName('multicooker');
+multicooker.setDevicePower(250);
+multicooker.setDeviceType('For cooking');
+
+
+console.log(multicooker);
