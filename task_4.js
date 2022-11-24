@@ -18,11 +18,11 @@
 //      четкая связь между классом и его экземплярами (класс описывает множество, а экземпляр конкретную реализацию);
 //      использование синтаксиса ES6 (кроме функции-конструкторов) и т. д.
 
-function ElectricAppliance(deviceName, devicePower, deviceType) {
-    this.deviceName = deviceName;
-    this.devicePower = devicePower;
+function ElectricAppliance() {
+    this.deviceName = undefined;
+    this.devicePower = undefined;
     this.switched = false;
-    this.deviceType = deviceType;
+    this.deviceType = undefined;
 }
 
 
@@ -44,38 +44,41 @@ ElectricAppliance.prototype.setDeviceType = function (deviceType) {
 
 function KitchenApp() {
     this.funcDelayedStart = false;
-}
+    this.switchWithTimeout = function (timeout) {
+        devname = this.deviceName
+        if (this.funcDelayedStart) {
+            console.log('Start delay!')
+            setTimeout(function () {console.log(`${devname} is starting cook!`);
+                this.switched = true;
+            }, timeout*1000);
+        } else
+        {console.log(`Have not start delay function!`)}
 
-// KitchenApp.prototype.startDelay = function (time) {
-//     console.log(`${time}`)
-// }
+    };
+}
 
 
 function ComputersApp(comptype) {
     this.compType = comptype;
     this.sleepMode = false;
-
+    this.sleepModeOn = function () {
+        this.sleepMode = true;
+        console.log(`SleepMode is activate!`)
+    };
+    this.sleepModeOff = function () {
+        this.sleepMode = false;
+    };
 }
-
-ComputersApp.prototype.sleepModeOn = function () {
-    this.sleepMode = true;
-    console.log(`SleepMode is activate!`)
-};
-ComputersApp.prototype.sleepModeOff = function () {
-    this.sleepMode = false;
-};
 
 
 function LightingApp(lightingType) {
     this.lightingType = lightingType;
-    this.installed = false;
-    this.installLocation = undefined;
-
-}
-
-LightingApp.prototype.delayedStart = function (location) {
-    this.installed = true;
-    this.installLocation = location;
+    this.mounted = false;
+    this.mountLocation = undefined;
+    this.mount = function (location) {
+        this.mounted = true;
+        this.mountLocation = location;
+    }
 }
 
 
@@ -85,6 +88,7 @@ LightingApp.prototype = new ElectricAppliance();
 
 const comp1 = new ComputersApp('PC tower');
 comp1.setDeviceName('Computer 1');
+comp1.setDeviceType('ComputersApp')
 comp1.setDevicePower(350);
 console.log(comp1);
 
@@ -93,7 +97,14 @@ const multicooker = new KitchenApp();
 multicooker.funcDelayedStart = true;
 multicooker.setDeviceName('multicooker');
 multicooker.setDevicePower(250);
-multicooker.setDeviceType('For cooking');
-
+multicooker.setDeviceType('KitchenApp');
 
 console.log(multicooker);
+// multicooker.switchWithTimeout(5);
+
+// const lamp1 = new LightingApp();
+// lamp1.setDeviceName('chandelier');
+// lamp1.setDevicePower(95);
+// lamp1.setDeviceType('LightingApp');
+//
+// console.log(lamp1);
