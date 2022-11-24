@@ -45,14 +45,16 @@ ElectricAppliance.prototype.setDeviceType = function (deviceType) {
 function KitchenApp() {
     this.funcDelayedStart = false;
     this.switchWithTimeout = function (timeout) {
-        devname = this.deviceName
+        const deviceName = this.deviceName
         if (this.funcDelayedStart) {
-            console.log('Start delay!')
-            setTimeout(function () {console.log(`${devname} is starting cook!`);
+            console.log('The countdown has begun!')
+            setTimeout(function () {
+                console.log(`${deviceName} starts working!`);
                 this.switched = true;
-            }, timeout*1000);
-        } else
-        {console.log(`Have not start delay function!`)}
+            }, timeout * 1000);
+        } else {
+            console.log(`Have not start delay function!`)
+        }
 
     };
 }
@@ -100,11 +102,17 @@ multicooker.setDevicePower(250);
 multicooker.setDeviceType('KitchenApp');
 
 console.log(multicooker);
-// multicooker.switchWithTimeout(5);
+multicooker.switchWithTimeout(10);
 
-// const lamp1 = new LightingApp();
-// lamp1.setDeviceName('chandelier');
-// lamp1.setDevicePower(95);
-// lamp1.setDeviceType('LightingApp');
-//
-// console.log(lamp1);
+const lamp1 = new LightingApp('LED lamp');
+lamp1.setDeviceName('chandelier');
+lamp1.setDevicePower(95);
+lamp1.setDeviceType('LightingApp');
+lamp1.mount('ceiling')
+
+console.log(lamp1);
+
+comp1.switchOn();
+lamp1.switchOn();
+
+console.log(`Общее электропотребление включенных приборов составляет: ${comp1.devicePower + lamp1.devicePower} Вт`);
